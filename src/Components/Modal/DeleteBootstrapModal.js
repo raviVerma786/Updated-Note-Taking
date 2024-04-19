@@ -11,15 +11,18 @@ function DeleteBootstrapModal(props) {
 
   const deleteFromDatabase = async () => {
     if (props.imgurl) {
-      const imgDbRef = storageRef(imgDb,`${userDetails.user}/Notes/` + props.id);
+      const imgDbRef = storageRef(
+        imgDb,
+        `${userDetails.user}/Notes/` + props.id
+      );
 
       await deleteObject(imgDbRef)
         .then(() => console.log("Image Deleted From database successfully"))
         .catch((error) => console.log(error));
     }
-    
+
     const db = getDatabase(app);
-    const dbNoteRef =  ref(db, `${userDetails.user}/Notes/` + props.id);
+    const dbNoteRef = ref(db, `${userDetails.user}/Notes/` + props.id);
     await remove(dbNoteRef);
   };
 

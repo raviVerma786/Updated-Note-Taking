@@ -1,25 +1,28 @@
-import React,{useContext, useEffect} from "react";
+import React, { useContext, useEffect } from "react";
 import "./SignIn.css";
 import { useState } from "react";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 import { UserContext } from "../Context/UserCredentials";
 
 export const SignIn = (props) => {
   let navigate = useNavigate();
-  
+
   let [authMode, setAuthMode] = useState("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
 
   const userDetails = useContext(UserContext);
-  
-  const NavigateToHome = ()=>{
+
+  const NavigateToHome = () => {
     let path = `/`;
     navigate(path);
-  }
+  };
 
   const changeAuthMode = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin");
@@ -32,13 +35,13 @@ export const SignIn = (props) => {
         // console.log(userCredentials);
         userDetails.setSignedIn(true);
         userDetails.setEmail(email);
-        localStorage.setItem('token',userCredentials._tokenResponse.idToken);
-        localStorage.setItem('userId',userCredentials._tokenResponse.localId);
+        localStorage.setItem("token", userCredentials._tokenResponse.idToken);
+        localStorage.setItem("userId", userCredentials._tokenResponse.localId);
         NavigateToHome();
       })
       .catch((error) => {
         console.log(error);
-        alert('User does not exist ! \nPlease Sign up !')
+        alert("User does not exist ! \nPlease Sign up !");
       });
   };
 
@@ -52,19 +55,16 @@ export const SignIn = (props) => {
         console.log(error);
       });
 
-      changeAuthMode();
+    changeAuthMode();
   };
 
-  useEffect(()=>{
-    if(authMode === "signin"){
+  useEffect(() => {
+    if (authMode === "signin") {
       document.getElementById("signInEmailInput").select();
-    }
-    else{
+    } else {
       document.getElementById("signUpNameInput").select();
     }
-    
-
-  },[authMode])
+  }, [authMode]);
 
   if (authMode === "signin") {
     return (
@@ -144,7 +144,6 @@ export const SignIn = (props) => {
               onChange={(e) => setUserName(e.target.value)}
               id="signUpNameInput"
               required
-              
             />
           </div>
           <div className="form-group mt-3">

@@ -1,4 +1,4 @@
-import React,{ useContext } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../Context/UserCredentials";
 import { auth } from "../firebase";
@@ -10,13 +10,13 @@ const Navbar = (props) => {
     let path = `/login`;
     navigate(path);
   };
-  
+
   const userDetails = useContext(UserContext);
   console.log(userDetails);
 
-  const logOutUser = ()=>{
-    console.log('Log out called');
-    signOut(auth).then((res)=> {
+  const logOutUser = () => {
+    console.log("Log out called");
+    signOut(auth).then((res) => {
       console.log("Successfully logged out!");
       localStorage.removeItem("token");
       localStorage.removeItem("userId");
@@ -24,9 +24,8 @@ const Navbar = (props) => {
       userDetails.setUser(null);
       userDetails.setEmail(null);
       routeChange();
-    })
-  }
-  
+    });
+  };
 
   return (
     <>
@@ -35,21 +34,23 @@ const Navbar = (props) => {
           Note Taking App
         </a>
 
-        {!userDetails.signedIn ? <button
-          id="LogInButton"
-          className="btn btn-outline-primary mx-3 my-sm-0"
-          onClick={routeChange}
-        >
-          Log in/Sign up
-        </button> : 
-         <button
-          id="LogInButton"
-          className="btn btn-outline-primary mx-2 my-sm-0"
-          onClick={logOutUser}
-        >
-          Log out
-        </button>
-        }
+        {!userDetails.signedIn ? (
+          <button
+            id="LogInButton"
+            className="btn btn-outline-primary mx-3 my-sm-0"
+            onClick={routeChange}
+          >
+            Log in/Sign up
+          </button>
+        ) : (
+          <button
+            id="LogInButton"
+            className="btn btn-outline-primary mx-2 my-sm-0"
+            onClick={logOutUser}
+          >
+            Log out
+          </button>
+        )}
       </nav>
     </>
   );

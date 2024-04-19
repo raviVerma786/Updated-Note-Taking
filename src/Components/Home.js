@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import "../App.css";
-import { List2 } from "./List2";
+import { List } from "./List";
 import { app, imgDb } from "../firebase";
 import { getDatabase, ref, set, onValue } from "firebase/database";
 import { UserContext } from "../Context/UserCredentials";
@@ -219,7 +219,7 @@ export default function Home() {
                 <div className="todo_style">
                   {Object.entries(notesData).map(([key, value]) => {
                     return (
-                      <List2
+                      <List
                         noteVal={value.note}
                         key={key}
                         id={key}

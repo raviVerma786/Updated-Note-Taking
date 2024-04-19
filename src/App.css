@@ -1,10 +1,10 @@
-*{
+* {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
-.mainDiv{
+.mainDiv {
   width: 100%;
   height: 100vh;
   background: rgb(176, 197, 197);
@@ -14,7 +14,7 @@
   align-items: center;
   text-align: center;
 }
-.centerDiv{
+.centerDiv {
   background-color: white;
   width: 100%;
   height: 100vh;
@@ -33,7 +33,7 @@
   margin: 0 .3rem;
 } */
 
-#noteInput{
+#noteInput {
   text-align: center;
   height: 3rem;
   width: 60%;
@@ -41,21 +41,21 @@
   background: transparent;
   font-size: 20px;
   font-weight: 500;
-  outline:none;
-  border-bottom : 2px solid grey;
+  outline: none;
+  border-bottom: 2px solid grey;
 }
 
-.updateInput{
+.updateInput {
   text-align: left;
 }
-ol{
+ol {
   margin-top: 2rem;
   display: flex;
   /* gap: 1rem; */
   flex-wrap: wrap;
 }
 
-ol li{
+ol li {
   padding-left: 0;
   text-align: left;
   font-size: 1.5rem;
@@ -63,11 +63,11 @@ ol li{
   min-height: 1rem;
   display: flex;
   align-items: center;
-  color:gray;
+  color: gray;
   text-transform: capitalize;
 }
 
-.todo_style{
+.todo_style {
   display: flex;
   flex-direction: row;
   /* max-width: 100%; */
@@ -79,7 +79,7 @@ ol li{
   /* width: 100vw; */
 }
 
-.todo_style .fa-times{
+.todo_style .fa-times {
   width: 1.75rem;
   height: 1.75rem;
   display: flex;
@@ -94,55 +94,55 @@ ol li{
   box-shadow: 5px 5px 15px -5px black;
 }
 
-.btn{
+.btn {
   color: white !important;
   background-color: #69ee7a;
 }
-.btn:hover{
+.btn:hover {
   background-color: rgb(56, 148, 56);
 }
-.todo_style .fa-times:hover{
+.todo_style .fa-times:hover {
   color: white;
   background-color: rgb(230, 47, 47);
   cursor: pointer;
 }
 
-.uploadImage{
+.uploadImage {
   /* max-width: 33%; */
   text-align: center;
 }
 
-.uploadImage img{
+.uploadImage img {
   max-height: 30%;
 }
-.listCard{
+.listCard {
   /* max-width: 30%; */
   /* max-height: 20vh; */
 }
 
-@media screen and (max-width:550px) {
+@media screen and (max-width: 550px) {
   /* .centerDiv{
     width: 85%;
     height: 90vh;
   } */
-  
-  .todo_style .fa-times{
+
+  .todo_style .fa-times {
     width: 1.2rem;
     height: 1.2rem;
   }
 
-  .listCard{
+  .listCard {
     width: 100%;
   }
 }
 
-@media screen and (min-width:550px) and (max-width:700px) {
+@media screen and (min-width: 550px) and (max-width: 700px) {
   /* .centerDiv{
     width: 85%;
     height: 90vh;
   } */
 
-  .listCard{
+  .listCard {
     width: 80%;
   }
 }

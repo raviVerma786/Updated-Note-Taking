@@ -8,7 +8,6 @@ const UpdateBootrapModal = (props) => {
   const [inputValue, setInputValue] = useState("");
   useState(() => {
     setInputValue(props.notedata);
-
     return () => setInputValue("");
   }, [props.noteData]);
 
@@ -33,12 +32,12 @@ const UpdateBootrapModal = (props) => {
       dateStyle: "medium",
       timeZone,
     }).format(date);
-
+    
     const db = getDatabase(app);
     set(ref(db, `${userDetails.user}/Notes/` + props.id), {
       id: props.id,
       note: inputValue,
-      url: props.UploadImgUrl,
+      url: props.imgurl,
       date: dt,
       time: t,
     })
