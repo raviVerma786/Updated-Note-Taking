@@ -38,7 +38,8 @@ export const List = (props) => {
                   src={props.UploadImgUrl}
                   width="200px"
                   height="200px"
-                  alt="404 pic not found"
+                  id="docimage"
+                  alt=""
                 />
               </Link>
             )}

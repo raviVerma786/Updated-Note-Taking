@@ -195,28 +195,36 @@ export default function Home() {
             <br />
             {userDetails.signedIn && <h2>Welcome To NoteTaking App</h2>}
             <br />
-            <input
-              id="noteInput"
-              type="text"
-              placeholder="Create New Note"
-              onChange={handleInputNoteChange}
-              value={inputData}
-            />
-
-            <label htmlFor="fileInput" className={`btn btn-${!img ? "primary" : "success"}`}>{!img ? "Upload" : "Attached"}</label>
-            <input
-              onChange={(e) => setImg(e.target.files[0])}
-              type="file"
-              id="fileInput"
-              style={{display:"none"}}
-            />
-            <button
-              disabled={inputData.length === 0}
-              className="btn btn-success mx-2 rounded-pill"
-              onClick={putDataIntoDatabase}
-            >
-              ➕
-            </button>
+            <div className="operationControl">
+              <input
+                id="noteInput"
+                type="text"
+                placeholder="Create New Note"
+                onChange={handleInputNoteChange}
+                value={inputData}
+              />
+              {/* <div className="operationButtons mt-2"> */}
+              <label
+                htmlFor="fileInput"
+                className={`btn btn-${!img ? "primary" : "success"}`}
+              >
+                {!img ? "Upload" : "Attached"}
+              </label>
+              <input
+                onChange={(e) => setImg(e.target.files[0])}
+                type="file"
+                id="fileInput"
+                style={{ display: "none" }}
+              />
+              <button
+                disabled={inputData.length === 0 && !img}
+                className="btn btn-success mx-2 rounded-pill"
+                onClick={putDataIntoDatabase}
+              >
+                ➕
+              </button>
+              {/* </div> */}
+            </div>
             <div className="mt-5">
               {notesData && (
                 <div className="todo_style">

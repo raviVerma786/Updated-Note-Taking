@@ -9,6 +9,7 @@ body {
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 code {
@@ -70,4 +71,12 @@ code {
   #LogInButton {
     font-size: 1rem;
   }
+}
+
+
+#docimage{
+  background-image: url('./Components/image.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
