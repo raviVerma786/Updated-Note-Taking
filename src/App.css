@@ -1,0 +1,148 @@
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.mainDiv{
+  width: 100%;
+  height: 100vh;
+  background: rgb(176, 197, 197);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.centerDiv{
+  background-color: white;
+  width: 100%;
+  height: 100vh;
+  box-shadow: 5px 5px 25px -5px black;
+  /* border-radius: 1.5rem; */
+  overflow-y: scroll;
+}
+
+/* h1{
+  color: white;
+  background: transparent;
+  background-color: grey;
+  padding: 1rem 0 1rem 0;
+  box-shadow: 5px 5px 15px -5px rgb(16, 20, 70);
+  border-radius: 1rem;
+  margin: 0 .3rem;
+} */
+
+#noteInput{
+  text-align: center;
+  height: 3rem;
+  width: 60%;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  font-weight: 500;
+  outline:none;
+  border-bottom : 2px solid grey;
+}
+
+.updateInput{
+  text-align: left;
+}
+ol{
+  margin-top: 2rem;
+  display: flex;
+  /* gap: 1rem; */
+  flex-wrap: wrap;
+}
+
+ol li{
+  padding-left: 0;
+  text-align: left;
+  font-size: 1.5rem;
+  font-weight: 500;
+  min-height: 1rem;
+  display: flex;
+  align-items: center;
+  color:gray;
+  text-transform: capitalize;
+}
+
+.todo_style{
+  display: flex;
+  flex-direction: row;
+  /* max-width: 100%; */
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  /* width: 100vw; */
+}
+
+.todo_style .fa-times{
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(148, 43, 43);
+  border-radius: 50%;
+  padding: 0.85rem;
+  /* margin-right: 0.1rem; */
+  /* color: rgb(248, 239, 239); */
+  color: white;
+  box-shadow: 5px 5px 15px -5px black;
+}
+
+.btn{
+  color: white !important;
+  background-color: #69ee7a;
+}
+.btn:hover{
+  background-color: rgb(56, 148, 56);
+}
+.todo_style .fa-times:hover{
+  color: white;
+  background-color: rgb(230, 47, 47);
+  cursor: pointer;
+}
+
+.uploadImage{
+  /* max-width: 33%; */
+  text-align: center;
+}
+
+.uploadImage img{
+  max-height: 30%;
+}
+.listCard{
+  /* max-width: 30%; */
+  /* max-height: 20vh; */
+}
+
+@media screen and (max-width:550px) {
+  /* .centerDiv{
+    width: 85%;
+    height: 90vh;
+  } */
+  
+  .todo_style .fa-times{
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .listCard{
+    width: 100%;
+  }
+}
+
+@media screen and (min-width:550px) and (max-width:700px) {
+  /* .centerDiv{
+    width: 85%;
+    height: 90vh;
+  } */
+
+  .listCard{
+    width: 80%;
+  }
+}
