@@ -75,6 +75,7 @@ const UpdateBootrapModal = (props) => {
           type="text"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
+          name = "updateInput"
         />
 
         {/* <textarea ref={ref => ref && ref.focus()} onFocus={(e)=>e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)} className="form-control" id="exampleFormControlTextarea1" rows="3" value={inputValue} onChange={(e)=>setInputValue(e.target.value)} ></textarea> */}
