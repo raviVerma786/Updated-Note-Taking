@@ -12,10 +12,10 @@ const Navbar = (props) => {
   };
 
   const userDetails = useContext(UserContext);
-  console.log(userDetails);
+  // console.log(userDetails);
 
   const logOutUser = () => {
-    console.log("Log out called");
+    console.log("Log out called !");
     signOut(auth).then((res) => {
       console.log("Successfully logged out!");
       localStorage.removeItem("token");

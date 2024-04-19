@@ -49,7 +49,8 @@ export const SignIn = (props) => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
-        console.log(userCredentials);
+        // console.log(userCredentials);
+        console.log("New user account created successfully !")
       })
       .catch((error) => {
         console.log(error);
