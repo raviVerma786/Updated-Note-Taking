@@ -202,10 +202,13 @@ export default function Home() {
               onChange={handleInputNoteChange}
               value={inputData}
             />
+
+            <label htmlFor="fileInput" className={`btn btn-${!img ? "primary" : "success"}`}>{!img ? "Upload" : "Attached"}</label>
             <input
               onChange={(e) => setImg(e.target.files[0])}
               type="file"
               id="fileInput"
+              style={{display:"none"}}
             />
             <button
               disabled={inputData.length === 0}
