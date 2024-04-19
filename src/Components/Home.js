@@ -52,11 +52,11 @@ export default function Home() {
   const putDataIntoDatabase = async () => {
     //storing image into database
     if (img) {
-      const imgRef = storageRef(imgDb, ` ${userDetails.user}/Notes/` + noteId);
+      const imgRef = storageRef(imgDb, `${userDetails.user}/Notes/` + noteId);
       await uploadBytes(imgRef, img)
-        .then((file) => {
-          console.log(file);
-          return getDownloadURL(file.ref);
+        .then(async (file) => {
+          // console.log(file);
+          return await getDownloadURL(file.ref);
         })
         .then((url) => {
           setImgUrl(url);
