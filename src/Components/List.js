@@ -7,6 +7,11 @@ import { Link } from "react-router-dom";
 export const List = (props) => {
   const [updating, setUpdating] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  
+  // const handleImageFault = ()=>{
+  //   document.getElementById("docimage").src = "./image.png";
+  // }
+
   return (
     <>
       <UpdateBootrapModal
