@@ -230,7 +230,7 @@ export default function Home() {
                 <div className="todo_style">
                   {Object.entries(notesData).map(([key, value]) => {
                     return (
-                      <List
+                      (value.note.indexOf(userDetails.searchInput) !== -1) && <List
                         noteVal={value.note}
                         key={key}
                         id={key}

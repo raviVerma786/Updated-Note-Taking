@@ -33,7 +33,16 @@ const Navbar = (props) => {
         <a id="logo" className="navbar-brand mx-2" href="/">
           Note Taking App
         </a>
-
+        <div>
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            value = {userDetails.searchInput}
+            onChange={(e)=>userDetails.setSearchInput(e.target.value)}
+          />
+</div>
         {!userDetails.signedIn ? (
           <button
             id="LogInButton"
