@@ -29,20 +29,10 @@ const Navbar = (props) => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top d-flex justify-content-between">
-        <a id="logo" className="navbar-brand mx-2" href="/">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top d-flex bd-highlight">
+        <a id="logo" className="navbar-brand mx-2 p-2 flex-grow-1 bd-highlight" href="/">
           Note Taking App
         </a>
-        <div>
-          <input
-            class="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            value = {userDetails.searchInput}
-            onChange={(e)=>userDetails.setSearchInput(e.target.value)}
-          />
-</div>
         {!userDetails.signedIn ? (
           <button
             id="LogInButton"
@@ -52,13 +42,24 @@ const Navbar = (props) => {
             Log in/Sign up
           </button>
         ) : (
+          <>
+          <input
+            className="form-control mr-sm-2 p-2 bd-highlight w-25"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            value = {userDetails.searchInput}
+            onChange={(e)=>userDetails.setSearchInput(e.target.value)}
+          />
+
           <button
             id="LogInButton"
-            className="btn btn-outline-primary mx-2 my-sm-0"
+            className="btn btn-outline-primary mx-2 my-sm-0 p-2 bd-highlight"
             onClick={logOutUser}
           >
             Log out
           </button>
+          </>
         )}
       </nav>
     </>
