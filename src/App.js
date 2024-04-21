@@ -5,16 +5,9 @@ import { SignIn } from "./Components/SignIn";
 import { Routes, Route } from "react-router-dom";
 
 const App = () => {
-  const [userSignedIn, setUserSignedIn] = useState(false);
-  const [user, setUser] = useState(null);
   return (
     <>
-      <Navbar
-        setUserSignedIn={setUserSignedIn}
-        userSignedIn={userSignedIn}
-        setUser={setUser}
-        user={user}
-      />
+      <Navbar/>
 
       <Routes>
         <Route path="/" element={<Home />} />

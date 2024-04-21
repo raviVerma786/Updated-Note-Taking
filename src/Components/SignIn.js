@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./SignIn.css";
 import { useState } from "react";
 import { auth } from "../firebase";
@@ -7,17 +7,35 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { UserContext } from "../Context/UserCredentials";
+import useZustandStore from "../Context/ZustandStore";
 
-export const SignIn = (props) => {
+export const SignIn = () => {
   let navigate = useNavigate();
 
   let [authMode, setAuthMode] = useState("signin");
-  const [email, setEmail] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
 
-  const userDetails = useContext(UserContext);
+  const {
+    email,
+    setEmail,
+    user,
+    setUser,
+    signedIn,
+    setSignedIn,
+    searchInput,
+    setSearchInput,
+  } = useZustandStore((state) => ({
+    email: state.email,
+    setEmail: state.setEmail,
+    user: state.user,
+    setUser: state.setUser,
+    signedIn: state.signedIn,
+    setSignedIn: state.setSignedIn,
+    searchInput: state.searchInput,
+    setSearchInput: state.setSearchInput,
+  }));
 
   const NavigateToHome = () => {
     let path = `/`;
@@ -30,13 +48,13 @@ export const SignIn = (props) => {
 
   const SignInHandle = (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, userEmail, password)
       .then((userCredentials) => {
-        // console.log(userCredentials);
-        userDetails.setSignedIn(true);
-        userDetails.setEmail(email);
+        setSignedIn(true);
+        setEmail(userEmail);
         localStorage.setItem("token", userCredentials._tokenResponse.idToken);
         localStorage.setItem("userId", userCredentials._tokenResponse.localId);
+        setUser(localStorage.getItem("userId"));
         NavigateToHome();
       })
       .catch((error) => {
@@ -47,10 +65,9 @@ export const SignIn = (props) => {
 
   const SignUpHandle = (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, userEmail, password)
       .then((userCredentials) => {
-        // console.log(userCredentials);
-        console.log("New user account created successfully !")
+        console.log("New user account created successfully !");
       })
       .catch((error) => {
         console.log(error);
@@ -90,8 +107,8 @@ export const SignIn = (props) => {
                 type="email"
                 className="form-control mt-1 updateInput"
                 placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
                 required
               />
             </div>
@@ -111,9 +128,6 @@ export const SignIn = (props) => {
                 Sign In
               </button>
             </div>
-            {/* <p className="text-center mt-2">
-              Forgot <a href="">password?</a>
-            </p> */}
           </div>
         </form>
       </div>
@@ -153,8 +167,8 @@ export const SignIn = (props) => {
               type="email"
               className="form-control mt-1 updateInput"
               placeholder="Email Address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={userEmail}
+              onChange={(e) => userEmail(e.target.value)}
               required
             />
           </div>
@@ -175,9 +189,6 @@ export const SignIn = (props) => {
               Sign Up
             </button>
           </div>
-          {/* <p className="text-center mt-2">
-            Forgot <a href="#">password?</a>
-          </p> */}
         </div>
       </form>
     </div>

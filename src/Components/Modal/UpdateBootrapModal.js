@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { app } from "../../firebase";
 import { getDatabase, set, ref } from "firebase/database";
 import { Button, Modal } from "react-bootstrap";
-import { UserContext } from "../../Context/UserCredentials";
+import useZustandStore from "../../Context/ZustandStore";
 
 const UpdateBootrapModal = (props) => {
   const [inputValue, setInputValue] = useState("");
@@ -11,7 +11,25 @@ const UpdateBootrapModal = (props) => {
     return () => setInputValue("");
   }, [props.noteData]);
 
-  const userDetails = useContext(UserContext);
+  const {
+    email,
+    setEmail,
+    user,
+    setUser,
+    signedIn,
+    setSignedIn,
+    searchInput,
+    setSearchInput,
+  } = useZustandStore((state) => ({
+    email: state.email,
+    setEmail: state.setEmail,
+    user: state.user,
+    setUser: state.setUser,
+    signedIn: state.signedIn,
+    setSignedIn: state.setSignedIn,
+    searchInput: state.searchInput,
+    setSearchInput: state.setSearchInput,
+  }));
 
   const updateFromDatabase = () => {
     const date = new Date();
@@ -32,9 +50,10 @@ const UpdateBootrapModal = (props) => {
       dateStyle: "medium",
       timeZone,
     }).format(date);
-    
+
     const db = getDatabase(app);
-    set(ref(db, `${userDetails.user}/Notes/` + props.id), {
+    // set(ref(db, `${userDetails.user}/Notes/` + props.id), {
+    set(ref(db, `${user}/Notes/` + props.id), {
       id: props.id,
       note: inputValue,
       url: props.imgurl,
@@ -75,10 +94,8 @@ const UpdateBootrapModal = (props) => {
           type="text"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          name = "updateInput"
+          name="updateInput"
         />
-
-        {/* <textarea ref={ref => ref && ref.focus()} onFocus={(e)=>e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)} className="form-control" id="exampleFormControlTextarea1" rows="3" value={inputValue} onChange={(e)=>setInputValue(e.target.value)} ></textarea> */}
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide} className="bg-success">
