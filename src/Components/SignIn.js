@@ -17,25 +17,7 @@ export const SignIn = () => {
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
 
-  const {
-    email,
-    setEmail,
-    user,
-    setUser,
-    signedIn,
-    setSignedIn,
-    searchInput,
-    setSearchInput,
-  } = useZustandStore((state) => ({
-    email: state.email,
-    setEmail: state.setEmail,
-    user: state.user,
-    setUser: state.setUser,
-    signedIn: state.signedIn,
-    setSignedIn: state.setSignedIn,
-    searchInput: state.searchInput,
-    setSearchInput: state.setSearchInput,
-  }));
+  const store = useZustandStore();
 
   const NavigateToHome = () => {
     let path = `/`;
@@ -50,11 +32,11 @@ export const SignIn = () => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, userEmail, password)
       .then((userCredentials) => {
-        setSignedIn(true);
-        setEmail(userEmail);
+        store.setSignedIn(true);
+        store.setEmail(userEmail);
         localStorage.setItem("token", userCredentials._tokenResponse.idToken);
         localStorage.setItem("userId", userCredentials._tokenResponse.localId);
-        setUser(localStorage.getItem("userId"));
+        store.setUser(localStorage.getItem("userId"));
         NavigateToHome();
       })
       .catch((error) => {

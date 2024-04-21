@@ -11,25 +11,7 @@ const UpdateBootrapModal = (props) => {
     return () => setInputValue("");
   }, [props.noteData]);
 
-  const {
-    email,
-    setEmail,
-    user,
-    setUser,
-    signedIn,
-    setSignedIn,
-    searchInput,
-    setSearchInput,
-  } = useZustandStore((state) => ({
-    email: state.email,
-    setEmail: state.setEmail,
-    user: state.user,
-    setUser: state.setUser,
-    signedIn: state.signedIn,
-    setSignedIn: state.setSignedIn,
-    searchInput: state.searchInput,
-    setSearchInput: state.setSearchInput,
-  }));
+  const store = useZustandStore();
 
   const updateFromDatabase = () => {
     const date = new Date();
@@ -53,7 +35,7 @@ const UpdateBootrapModal = (props) => {
 
     const db = getDatabase(app);
     // set(ref(db, `${userDetails.user}/Notes/` + props.id), {
-    set(ref(db, `${user}/Notes/` + props.id), {
+    set(ref(db, `${store.user}/Notes/` + props.id), {
       id: props.id,
       note: inputValue,
       url: props.imgurl,

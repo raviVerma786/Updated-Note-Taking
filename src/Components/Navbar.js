@@ -10,26 +10,8 @@ const Navbar = () => {
     let path = `/login`;
     navigate(path);
   };
-  //zustand
-  const {
-    email,
-    setEmail,
-    user,
-    setUser,
-    signedIn,
-    setSignedIn,
-    searchInput,
-    setSearchInput,
-  } = useZustandStore((state) => ({
-    email: state.email,
-    setEmail: state.setEmail,
-    user: state.user,
-    setUser: state.setUser,
-    signedIn: state.signedIn,
-    setSignedIn: state.setSignedIn,
-    searchInput: state.searchInput,
-    setSearchInput: state.setSearchInput,
-  }));
+
+  const store = useZustandStore();
 
   const logOutUser = () => {
     console.log("Log out called !");
@@ -38,9 +20,9 @@ const Navbar = () => {
       localStorage.removeItem("token");
       localStorage.removeItem("userId");
       // console.log(user);
-      setSignedIn(false);
-      setUser(null);
-      setEmail(null);
+      store.setSignedIn(false);
+      store.setUser(null);
+      store.setEmail(null);
       routeChange();
     });
   };
@@ -55,7 +37,7 @@ const Navbar = () => {
         >
           Note Taking App
         </a>
-        {!signedIn ? (
+        {!store.signedIn ? (
           <button
             id="LogInButton"
             className="btn btn-outline-primary mx-3 my-sm-0"
@@ -70,8 +52,8 @@ const Navbar = () => {
               type="search"
               placeholder="Search"
               aria-label="Search"
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
+              value={store.searchInput}
+              onChange={(e) => store.setSearchInput(e.target.value)}
             />
 
             <button

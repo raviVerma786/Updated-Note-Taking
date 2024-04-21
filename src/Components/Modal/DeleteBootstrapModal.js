@@ -2,34 +2,15 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { app, imgDb } from "../../firebase";
 import { getDatabase, remove, ref } from "firebase/database";
-import { useContext } from "react";
 import { deleteObject, ref as storageRef } from "firebase/storage";
 import useZustandStore from "../../Context/ZustandStore";
 
 function DeleteBootstrapModal(props) {
-  const {
-    email,
-    setEmail,
-    user,
-    setUser,
-    signedIn,
-    setSignedIn,
-    searchInput,
-    setSearchInput,
-  } = useZustandStore((state) => ({
-    email: state.email,
-    setEmail: state.setEmail,
-    user: state.user,
-    setUser: state.setUser,
-    signedIn: state.signedIn,
-    setSignedIn: state.setSignedIn,
-    searchInput: state.searchInput,
-    setSearchInput: state.setSearchInput,
-  }));
+  const store = useZustandStore();
 
   const deleteFromDatabase = () => {
     if (props.imgurl) {
-      const imgDbRef = storageRef(imgDb, `${user}/Notes/` + props.id);
+      const imgDbRef = storageRef(imgDb, `${store.user}/Notes/` + props.id);
 
       deleteObject(imgDbRef)
         .then(() => console.log("Image Deleted From database successfully"))
@@ -37,7 +18,7 @@ function DeleteBootstrapModal(props) {
     }
 
     const db = getDatabase(app);
-    const dbNoteRef = ref(db, `${user}/Notes/` + props.id);
+    const dbNoteRef = ref(db, `${store.user}/Notes/` + props.id);
     remove(dbNoteRef);
   };
 

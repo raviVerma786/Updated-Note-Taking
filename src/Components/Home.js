@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState} from "react";
 import "../App.css";
 import { List } from "./List";
 import { app, imgDb } from "../firebase";
@@ -20,35 +20,16 @@ export default function Home() {
   const [imgUrl, setImgUrl] = useState("");
 
   const navigate = useNavigate();
-  //zustand
-  const {
-    email,
-    setEmail,
-    user,
-    setUser,
-    signedIn,
-    setSignedIn,
-    searchInput,
-    setSearchInput,
-  } = useZustandStore((state) => ({
-    email: state.email,
-    setEmail: state.setEmail,
-    user: state.user,
-    setUser: state.setUser,
-    signedIn: state.signedIn,
-    setSignedIn: state.setSignedIn,
-    searchInput: state.searchInput,
-    setSearchInput: state.setSearchInput,
-  }));
+  const store = useZustandStore();
 
   useEffect(() => {
-    const dbref = ref(db, `${user}/Notes`);
+    const dbref = ref(db, `${store.user}/Notes`);
     const token = localStorage.getItem("token");
     if (token) {
-      setSignedIn(true);
-      setUser(localStorage.getItem("userId"));
+      store.setSignedIn(true);
+      store.setUser(localStorage.getItem("userId"));
     } else {
-      setSignedIn(false);
+      store.setSignedIn(false);
       navigate("/login");
     }
 
@@ -70,7 +51,7 @@ export default function Home() {
 
   const putDataIntoDatabase = async () => {
     if (img) {
-      const imgRef = storageRef(imgDb, `${user}/Notes/` + noteId);
+      const imgRef = storageRef(imgDb, `${store.user}/Notes/` + noteId);
       await uploadBytes(imgRef, img)
         .then(async (file) => {
           return await getDownloadURL(file.ref);
@@ -87,7 +68,7 @@ export default function Home() {
             dateStyle: "medium",
             timeZone,
           }).format(date);
-          return set(ref(db, `${user}/Notes/` + noteId), {
+          return set(ref(db, `${store.user}/Notes/` + noteId), {
             id: noteId,
             note: inputData,
             url: url,
@@ -119,7 +100,7 @@ export default function Home() {
         timeZone,
       }).format(date);
       set(
-        ref(db, `${user}/Notes/` + noteId),
+        ref(db, `${store.user}/Notes/` + noteId),
         {
           id: noteId,
           note: inputData,
@@ -144,12 +125,12 @@ export default function Home() {
   };
 
   return (
-    signedIn && (
+    store.signedIn && (
       <>
         <div className="mainDiv">
           <div className="centerDiv">
             <br />
-            {signedIn && <h2>Welcome To NoteTaking App</h2>}
+            {store.signedIn && <h2>Welcome To NoteTaking App</h2>}
             <br />
             <div className="operationControl">
               <input
@@ -184,7 +165,7 @@ export default function Home() {
                 <div className="todo_style">
                   {Object.entries(notesData).map(([key, value]) => {
                     return (
-                      value.note.indexOf(searchInput) !== -1 && (
+                      value.note.indexOf(store.searchInput) !== -1 && (
                         <List
                           noteVal={value.note}
                           key={key}
